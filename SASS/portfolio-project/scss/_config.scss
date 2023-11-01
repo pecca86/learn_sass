@@ -1,0 +1,39 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+$primary-color: #212121;
+$secondary-color: #6767e4;
+$accent-color: #e46767;
+
+@mixin transition-ease {
+    transition: all 0.4s ease-in-out;
+}
+
+@function set-text-color($color) {
+    @if (lightness($color) > 40%) {
+        @return #000;
+    } @else {
+        @return #fff;
+    }
+}
+
+@mixin media-md {
+    @media screen and (min-width: 768px) {
+        @content; // whatever content we call this media query with will be passed in here
+    }
+}
+
+@mixin media-lg {
+    @media screen and (min-width: 1024px) {
+        @content; // whatever content we call this media query with will be passed in here
+    }
+}
+
+@mixin media-xl {
+    @media screen and (min-width: 1600px) {
+        @content; // whatever content we call this media query with will be passed in here
+    }
+}

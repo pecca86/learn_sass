@@ -1,0 +1,28 @@
+// CSS VARIABLE
+:root {
+    --primary-color: #f26a2e;
+    --accent-color: #d3d3d3;
+    --text-color: #fff;
+}
+
+// SASS VARIABLE ($)
+$primary-heading-color: var(--text-color);
+$primary-heading-size: 3rem;
+$secondary-heading-size: 2rem;
+$primary-color: var(--primary-color);
+$text-color: #fff;
+
+// Sass map
+$secondary-color: (
+    default: #2d8dc1,
+    dark: #f26a2e,
+    light: #f26a2e
+);
+
+$font-weigths: (
+    regular: 400,
+    medium: 500,
+    bold: 700
+);
+
+$mobile: 800px;

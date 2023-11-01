@@ -1,0 +1,116 @@
+// Include a sass partial
+@import './resets';
+@import './variables';
+
+// Sass function
+@function weigth($weight-name) {
+    @return map-get($font-weigths, $weight-name);
+}
+
+// Mixin
+@mixin flex-center($direction) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $direction;
+}
+
+@mixin theme($light-theme: true) {
+    @if $light-theme {
+        background: ligthen($primary-color, 100%);
+        color: darken($text-color, 100%);
+    }
+
+    @else {
+        background: #000;
+        color: #fff;
+        max-width: calc(100% - 200px); // css calc function
+        max-height: 100% - 50%; // sass calculation, CAN'T MIX TYPES!
+    }
+}
+
+// extend
+
+
+@mixin mobile {
+    @media (max-width: $mobile) {
+        @content; // content will be passed when mixin is called
+    }
+}
+
+.light-theme {
+    @include theme($light-theme: false);
+}
+
+// include the mixin
+.main {
+    @include flex-center(row);
+
+    @include mobile {
+        flex-direction: column;
+    }
+
+    &__first-paragraph {
+        font-weight: weigth(bold);
+    }
+
+    &__second-paragraph {
+        @extend .main__first-paragraph; // gets all styles from .main__first-paragraph
+
+        &:hover {
+            color: red;
+        }
+    }
+
+    //extend styles from one selector to another
+
+}
+
+// Nesting
+.nav {
+    border: 2px solid $primary-color;
+
+    // & = parent element
+    &__link_list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+    }
+
+    &__item {
+        display: inline-block;
+        margin-left: 30px;
+
+        a {
+            text-decoration: none;
+            text-transform: uppercase;
+            color: $primary-color;
+        }
+
+        // interpolation
+        #{&}__first_link {
+            color: red;
+            font-size: 1.5rem;
+
+            &:hover {
+                color: blue;
+            }
+        }
+    }
+}
+
+
+body {
+    background: var(--accent-color);
+}
+
+h1 {
+    font-size: $primary-heading-size;
+    color: $primary-heading-color
+}
+
+h2 {
+    font-size: $primary-heading-size;
+    color: map-get($secondary-color, default);
+}
